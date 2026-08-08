@@ -1,4 +1,5 @@
 using System.ComponentModel.DataAnnotations;
+using System.Text.Json.Serialization;
 
 namespace ms_course_logitrack.Models
 {
@@ -14,6 +15,7 @@ namespace ms_course_logitrack.Models
         public string Location { get; set; }
 
         public int? OrderId { get; set; }
+        [JsonIgnore]
         public Order? Order { get; set; }
 
         public string DisplayInfo()
