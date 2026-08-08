@@ -1,0 +1,6 @@
+@ms_course_logitrack_HostAddress = http://localhost:5071
+
+GET {{ms_course_logitrack_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
