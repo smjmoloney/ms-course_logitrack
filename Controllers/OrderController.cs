@@ -21,9 +21,8 @@ namespace ms_course_logitrack.Controllers
         [HttpGet]
         public async Task<ActionResult<IEnumerable<Order>>> GetAllOrders()
         {
-            var orders = await _context.Orders
-                .AsNoTracking()
-                .Include(order => order.Items)
+            var orders = await ReadOrdersWithItems()
+                .AsSplitQuery()
                 .ToListAsync();
 
             return Ok(orders);
@@ -32,9 +31,7 @@ namespace ms_course_logitrack.Controllers
         [HttpGet("{id}")]
         public async Task<ActionResult<Order>> GetOrderById(int id)
         {
-            var order = await _context.Orders
-                .AsNoTracking()
-                .Include(order => order.Items)
+            var order = await ReadOrdersWithItems()
                 .FirstOrDefaultAsync(order => order.OrderId == id);
 
             if (order == null)
@@ -75,6 +72,13 @@ namespace ms_course_logitrack.Controllers
             await _context.SaveChangesAsync();
 
             return NoContent();
+        }
+
+        private IQueryable<Order> ReadOrdersWithItems()
+        {
+            return _context.Orders
+                .AsNoTracking()
+                .Include(order => order.Items);
         }
     }
 }

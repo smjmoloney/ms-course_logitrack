@@ -9,6 +9,7 @@ using Microsoft.OpenApi;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
 builder.Services.AddDbContext<LogiTrackContext>();
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LogiTrackContext>();
