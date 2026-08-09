@@ -17,10 +17,5 @@ namespace ms_course_logitrack.Models
         public int? OrderId { get; set; }
         [JsonIgnore]
         public Order? Order { get; set; }
-
-        public string DisplayInfo()
-        {
-            return $"Item: {Name} (ID: {ItemId}) | Quantity: {Quantity} | Location: {Location}";
-        }
     }
 }

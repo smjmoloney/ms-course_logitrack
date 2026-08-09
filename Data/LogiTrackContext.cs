@@ -7,11 +7,13 @@ namespace ms_course_logitrack.Data
 {
     public class LogiTrackContext : IdentityDbContext<ApplicationUser>
     {
+        public LogiTrackContext(DbContextOptions<LogiTrackContext> options)
+            : base(options)
+        {
+        }
+
         public DbSet<InventoryItem> InventoryItems => Set<InventoryItem>();
         public DbSet<Order> Orders => Set<Order>();
-
-        protected override void OnConfiguring(DbContextOptionsBuilder options)
-            => options.UseSqlite("Data Source=logitrack.db");
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

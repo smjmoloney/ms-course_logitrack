@@ -1,7 +1,7 @@
 using System.Text;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.EntityFrameworkCore;
 using ms_course_logitrack.Data;
-using ms_course_logitrack.Models;
 using ms_course_logitrack.Auth;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
@@ -11,7 +11,8 @@ var builder = WebApplication.CreateBuilder(args);
 
 builder.Services.AddMemoryCache();
 builder.Services.AddControllers();
-builder.Services.AddDbContext<LogiTrackContext>();
+builder.Services.AddDbContext<LogiTrackContext>(options =>
+    options.UseSqlite(builder.Configuration.GetConnectionString("LogiTrack")));
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<LogiTrackContext>();
 builder.Services
     .AddAuthentication(options =>
@@ -62,29 +63,6 @@ if (app.Environment.IsDevelopment())
 {
     app.UseSwagger();
     app.UseSwaggerUI();
-}
-
-using (var context = new LogiTrackContext())
-{
-    // Add test inventory item if none exist
-    if (!context.InventoryItems.Any())
-    {
-        context.InventoryItems.Add(new InventoryItem
-        {
-            Name = "Pallet Jack",
-            Quantity = 12,
-            Location = "Warehouse A"
-        });
-
-        context.SaveChanges();
-    }
-
-    // Retrieve and print inventory to confirm
-    var items = context.InventoryItems.ToList();
-    foreach (var item in items)
-    {
-        Console.WriteLine(item.DisplayInfo()); // Should print: Item: Pallet Jack | Quantity: 12 | Location: Warehouse A
-    }
 }
 
 app.UseHttpsRedirection();

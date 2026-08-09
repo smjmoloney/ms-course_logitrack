@@ -46,8 +46,20 @@ namespace ms_course_logitrack.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult<Order>> CreateOrder(Order order)
+        public async Task<ActionResult<Order>> CreateOrder(CreateOrderRequest request)
         {
+            var order = new Order
+            {
+                CustomerName = request.CustomerName,
+                DatePlaced = request.DatePlaced!.Value,
+                Items = request.Items.Select(item => new InventoryItem
+                {
+                    Name = item.Name,
+                    Quantity = item.Quantity,
+                    Location = item.Location
+                }).ToList()
+            };
+
             await _context.Orders.AddAsync(order);
             await _context.SaveChangesAsync();
 
