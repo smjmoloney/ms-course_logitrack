@@ -8,11 +8,11 @@ namespace ms_course_logitrack.Models
         [Key]
         public int ItemId { get; set; }
         [Required]
-        public string Name { get; set; }
+        public required string Name { get; set; }
         [Required]
         public int Quantity { get; set; }
         [Required]
-        public string Location { get; set; }
+        public required string Location { get; set; }
 
         public int? OrderId { get; set; }
         [JsonIgnore]

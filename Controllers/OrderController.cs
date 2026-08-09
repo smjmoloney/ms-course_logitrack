@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ms_course_logitrack.Data;
@@ -5,6 +6,7 @@ using ms_course_logitrack.Models;
 
 namespace ms_course_logitrack.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/orders")]
     public class OrderController : ControllerBase
@@ -56,6 +58,7 @@ namespace ms_course_logitrack.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteOrder(int id)
         {
             var order = await _context.Orders.FindAsync(id);

@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using ms_course_logitrack.Data;
@@ -5,6 +6,7 @@ using ms_course_logitrack.Models;
 
 namespace ms_course_logitrack.Controllers
 {
+    [Authorize]
     [ApiController]
     [Route("api/[controller]")]
     public class InventoryController : ControllerBase
@@ -27,6 +29,7 @@ namespace ms_course_logitrack.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Manager")]
         public async Task<ActionResult<InventoryItem>> AddInventoryItem(CreateInventoryItemRequest request)
         {
             var item = new InventoryItem
@@ -43,6 +46,7 @@ namespace ms_course_logitrack.Controllers
         }
 
         [HttpDelete("{id}")]
+        [Authorize(Roles = "Manager")]
         public async Task<IActionResult> DeleteInventoryItem(int id)
         {
             var item = await _context.InventoryItems.FindAsync(id);

@@ -7,7 +7,7 @@ namespace ms_course_logitrack.Models
         [Key]
         public int OrderId { get; set; }
         [Required]
-        public string CustomerName { get; set; }
+        public required string CustomerName { get; set; }
         [Required]
         public DateTime DatePlaced { get; set; }
         [Required]

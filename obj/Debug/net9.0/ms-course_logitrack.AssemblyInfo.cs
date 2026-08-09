@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("ms-course_logitrack")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+deee78c53450467bf535f1ee833c159631dd1874")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+1e2cb6475534b0c1f6b8efdba5d634c27f64f730")]
 [assembly: System.Reflection.AssemblyProductAttribute("ms-course_logitrack")]
 [assembly: System.Reflection.AssemblyTitleAttribute("ms-course_logitrack")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
